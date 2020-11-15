@@ -1,4 +1,9 @@
-<% @posts.each do  |p| %>
-  <%= p.user.name %>
-  <%= p.body %>
+<% @posts.each do  |post| %>
+  <div class= "card shadow-sm p-5 mt-5 mx-auto" style="width: 20rem">
+    <h5><%= post.user.name %></h5>
+    <%= post.body %>
+    <% if post.user == current_user %>
+      <%= link_to "Delete",posts_path(post), method: :delete %>
+  <% end %>
+  </div>
 <% end %>

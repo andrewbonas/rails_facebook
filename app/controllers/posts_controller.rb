@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
     
   def index
@@ -18,6 +17,14 @@ class PostsController < ApplicationController
         render :new, alert: "Post Failed"
       end
   end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to root_path, notice: "Post Deleted"
+  end
+  
+  private
 
   def post_params
     params.require(:post).permit(:body)
