@@ -1,9 +1,17 @@
+<h1 class="mb-6">Recent Posts</h1>
+  <div class= "card shadow-sm mt-5 mx-auto" style="width: 20rem">
+  <%= render 'form', post: @post %>
+</div>
+
+
 <% @posts.each do  |post| %>
-  <div class= "card shadow-sm p-5 mt-5 mx-auto" style="width: 20rem">
-    <h5><%= post.user.name %></h5>
+<div class= "card shadow-sm p-3 mt-3 mx-auto" style="width: 20rem">
+    <h5 class="d-inline"><%= post.user.name %></h5>
     <%= post.body %>
     <% if post.user == current_user %>
-      <%= link_to "Delete",posts_path(post), method: :delete %>
+      <%= link_to "Delete",post_path(post), method: :delete %>
   <% end %>
+  <%= link_to "Comment", post_path(post), method: :get %>
   </div>
 <% end %>
+</div>

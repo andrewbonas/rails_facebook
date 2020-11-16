@@ -1,0 +1,6 @@
+<%= form_with model: [ @post, @post.comments.build ], local: true do |f| %>
+  <div class= "form-group">
+    <%= f.text_area :body, placeholder: "Comment", class: "form-control" %>
+  </div>
+<%= f.submit class: "btn btn-outline btn-primary btn-small" %>
+<% end %>

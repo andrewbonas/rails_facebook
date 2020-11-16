@@ -1,0 +1,18 @@
+<div class= "card shadow-sm p-1 mt-3 mx-auto" style="width: 20rem">
+<p class="mb-4"> <%=@post.body %> </p>
+
+<div class="card-footer">
+  <% if @post.comments.any? %>
+    <% @post.comments.each do |comment| %>
+    <p>
+      <%= link_to comment.user.name, root_path, class: "h5 text-dark text-underline" %>
+       <p> <%= comment.body %></p>
+        <% if comment.user == current_user %>
+          <%= link_to "delete", [comment.post, comment], method: :delete %>
+        <% end %>
+    <% end %>
+    </p>
+  <% end %>
+<%= render 'comments/form' %>
+</div>
+</div>
