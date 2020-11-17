@@ -14,7 +14,7 @@ class PostsController < ApplicationController
       if @post.save
         redirect_to root_path, notice: "Post Created"
       else
-        render :new, alert: "Post Failed"
+        redirect_to root_path, alert: "Post cannot be blank"
       end
   end
 
@@ -26,6 +26,18 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to root_path, notice: "Post Deleted"
+  end
+
+  def like
+    @post = Post.find(params[:id])
+    @post.likers << current_user
+    redirect_back fallback_location: posts_path
+  end
+
+  def unlike
+    @post = Post.find(params[:id])
+    @post.likers.delete(current_user)
+    redirect_back fallback_location: posts_path
   end
   
   private

@@ -1,5 +1,22 @@
-<div class= "card shadow-sm p-1 mt-3 mx-auto" style="width: 20rem">
+<div class= "card shadow-sm mt-3 mx-auto" style="width: 40rem">
+<div class="card-body">
+<h5><%= @post.user.name %></h5>
 <p class="mb-4"> <%=@post.body %> </p>
+  
+  <% if @post.likers.include?(current_user) %>
+    <%= link_to unlike_post_path(@post), class: "text-decoration-none text-dark" do %>
+      <i class="fa fa-thumbs-up text-dark pr-2"></i> <%= pluralize(@post.likers.count, 'like') %>
+    <% end %>
+  <% else %>
+    <%= link_to like_post_path(@post), class: "text-decoration-none text-dark" do %>
+      <i class="fa fa-thumbs-up text-primary pr-2"></i><%= pluralize(@post.likers.count, 'like') %>
+    <% end %>
+  <% end %>
+  <% if @post.user == current_user %>
+    <%= link_to 'Edit', edit_post_path(@post), class: "float-right" %> 
+    <%= link_to 'Delete', post_path(@post), method: :delete, class: "float-right pr-2" %>
+  <% end %>
+</div>
 
 <div class="card-footer">
   <% if @post.comments.any? %>

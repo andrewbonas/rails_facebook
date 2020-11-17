@@ -1,17 +1,25 @@
 <h1 class="mb-6">Recent Posts</h1>
   <div class= "card shadow-sm mt-5 mx-auto" style="width: 20rem">
-  <%= render 'form', post: @post %>
-</div>
-
-
-<% @posts.each do  |post| %>
-<div class= "card shadow-sm p-3 mt-3 mx-auto" style="width: 20rem">
-    <h5 class="d-inline"><%= post.user.name %></h5>
-    <%= post.body %>
-    <% if post.user == current_user %>
-      <%= link_to "Delete",post_path(post), method: :delete %>
-  <% end %>
-  <%= link_to "Comment", post_path(post), method: :get %>
+    <%= render 'form', post: @post %>
   </div>
-<% end %>
+  
+  <% @posts.each do  |post| %>
+    <div class= "card shadow-sm p-3 mt-3 mx-auto" style="width: 20rem">
+      <h5 class="d-inline"><%= post.user.name %></h5>
+        <%= post.body %>
+        <% if post.likers.include?(current_user) %>
+          <%= link_to unlike_post_path(post), class: "text-decoration-none text-dark" do %>
+            <i class="fa fa-thumbs-up text-dark pr-2"></i> <%= pluralize(post.likers.count, 'like') %>
+          <% end %>
+        <% else %>
+          <%= link_to like_post_path(post), class: "text-decoration-none text-dark" do %>
+            <i class="fa fa-thumbs-up text-primary pr-2"></i><%= pluralize(post.likers.count, 'like') %>
+        <% end %>
+      <% end %>
+      <% if post.user == current_user %>
+        <%= link_to "Delete",post_path(post), method: :delete %>
+      <% end %>
+      <%= link_to "Comment", post_path(post), method: :get %>
+    </div>
+  <% end %>
 </div>
