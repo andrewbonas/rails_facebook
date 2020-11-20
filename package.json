@@ -1,5 +1,7 @@
 {
   "name": "rails_facebook",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "pg": "^8.5.1"
+  }
 }

@@ -30,6 +30,8 @@ gem "font-awesome-rails"
 
 gem 'devise', '~> 4.7', '>= 4.7.3'
 
+gem 'has_friendship'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -53,9 +55,6 @@ group :development do
   gem 'letter_opener'
 end
 
-group :production do
-  gem 'pg'
-end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
