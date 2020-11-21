@@ -51,11 +51,11 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'better_errors', '~> 2.9', '>= 2.9.1'
-  gem 'sqlite3'
+  
   gem 'letter_opener'
 end
-
-
+gem 'pg'
+#gem 'sqlite3'
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
