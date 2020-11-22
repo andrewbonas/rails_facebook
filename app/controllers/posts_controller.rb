@@ -2,11 +2,12 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
     
   def index
-    @posts = Post.all.order("created_at DESC")
+    @posts = current_user.posts.new
+    @posts =Post.where(user_id: current_user.friends).or(Post.where(user_id: current_user)).order(created_at: :desc)
   end
 
   def new
-    @post = current_user.posts.build
+    @post = Post.new
   end
 
   def create
