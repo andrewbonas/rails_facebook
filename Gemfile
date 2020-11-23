@@ -31,6 +31,7 @@ gem "font-awesome-rails"
 gem 'devise', '~> 4.7', '>= 4.7.3'
 
 gem 'has_friendship'
+gem 'bootstrap'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

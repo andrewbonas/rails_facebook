@@ -7,7 +7,7 @@
       <li class="nav-item">
         <a class="nav-link active" id="pills-request-tab" data-toggle="pill"
           href="#pills-requests" role="tab" aria-controls="pills-requests" 
-         aria-selected="false">Friend Requests</a>
+          aria-selected="false">Friend Requests</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="pills-users-tab" data-toggle="pill"
@@ -20,15 +20,16 @@
 
 <div class="tab-content mt-4" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-requests" role="tabpanel" aria-labelledby="pills-requests-tab">
-    <% if current_user.requested_friends.any? %>
-      <% current_user.requested_friends.each do |requesting_user| %>
-        <div class="list-group-item">
-          <%= link_to requesting_user.name, user_path(requesting_user), class: "h6 text-dark text-decoration-none" %>
-          <%= link_to 'Accept Request', accept_path(requesting_user), class: "btn btn-sm btn-outline-primary float-right" %>
-          <%= link_to 'Decline Request', decline_path(requesting_user), class: "btn btn-sm btn-outline-danger mr-2 float-right" %>
-        </div>
-      <% end %>
-    <% else %>
+    <div class="list-group shadow-sm mb-3">
+      <% if current_user.requested_friends.any? %>
+        <% current_user.requested_friends.each do |requesting_user| %>
+          <div class="list-group-item">
+            <%= link_to requesting_user.name, user_path(requesting_user), class: "h6 text-dark text-decoration-none" %>
+            <%= link_to 'Accept Request', accept_path(requesting_user), class: "btn btn-sm btn-outline-primary float-right" %>
+            <%= link_to 'Decline Request', decline_path(requesting_user), class: "btn btn-sm btn-outline-danger mr-2 float-right" %>
+          </div>
+       <% end %>
+     <% else %>
     <div class="list-group-item p-2">
       <span class="text-muted">No Friend Requests</span>
     </div>
@@ -36,25 +37,22 @@
   </div>
 </div>
 
-<div class="tab-pane" id="pills-users" role="tabpanel" aria-labelledby="pills-users-tab">
+<div class="tab-pane fade" id="pills-users" role="tabpanel" aria-labelledby="pills-users-tab">
   <div class="list-group shadow-sm mb-3">
     <% @users.each do |user| %>
       <% unless user == current_user %>
         <div class="list-group-item">
           <%= link_to user.name, users_path(user), class: "h6 text-dark text-decoration-none" %>
-          <% if current_user.pending_friends.include?(user) %>
-              <span class="text-muted float-right mr-3">Waiting for reply</span>
+            <% if current_user.pending_friends.include?(user) %>
+                <span class="text-muted float-right mr-3">Waiting for reply</span>
             <% else %>
-          <%= link_to 'Send Request', request_path(user),
-            class: "btn btn-sm btn-outline-primary float-right" unless current_user.friends_with?(user) %>
-          <%= link_to 'Unfriend', unfriend_path(user), class: "btn btn-sm btn-outline-primary float-right" if current_user.friends_with?(user) %>
-            
+              <%= link_to 'Send Request', request_path(user),
+                class: "btn btn-sm btn-outline-primary float-right" unless current_user.friends_with?(user) %>
+              <%= link_to 'Unfriend', unfriend_path(user), class: "btn btn-sm btn-outline-primary float-right" if current_user.friends_with?(user) %>  
+            <% end %>
         </div>
         <% end %>
       <% end %>
-    <% end %>
-  </div>
+   </div>
+ </div>
 </div>
-
-</div>
-

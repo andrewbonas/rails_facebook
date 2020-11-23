@@ -20,14 +20,14 @@ class UsersController < ApplicationController
   end
 
   def decline_frienship
-    requesting_user = User.find_by(params[:id])
+    requesting_user = User.find_by_id(params[:id])
     current_user.decline_request(requesting_user)
     redirect_to users_path, notice: "#{requesting_user.name} removed."
   end
 
   def remove_friendship
-    other_user = User.find_by(params[:id])
-    current_user.remove_friendship(other_user)
+    other_user = User.find_by_id(params[:id])
+    current_user.remove_friend(other_user)
     redirect_to users_path, notice: 'Friend Removed'
   end
 
