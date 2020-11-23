@@ -2,6 +2,7 @@
   "name": "rails_facebook",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.1",
     "pg": "^8.5.1"
   }
 }
