@@ -34,5 +34,5 @@ class UsersController < ApplicationController
   def others
     User.where_not(current_user)
   end
-
+  
 end

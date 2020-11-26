@@ -1,25 +1,46 @@
-<h1 class="mb-6">Recent Posts</h1>
-  <div class= "card shadow-sm mt-5 mx-auto" style="width: 20rem">
+<h1 class="mx-auto pl-3">Recent Posts</h1>
+  <div class= "card shadow-sm mt-3 mx-auto" style="width: 40rem">
     <%= render 'form', post: @post %>
   </div>
   
-  <% @posts.each do  |post| %>
-    <div class= "card shadow-sm p-3 mt-3 mx-auto" style="width: 20rem">
-      <h5 class="d-inline"><%= post.user.name %></h5>
-        <%= post.body %>
-        <% if post.likers.include?(current_user) %>
-          <%= link_to unlike_post_path(post), class: "text-decoration-none text-dark" do %>
-            <i class="fa fa-thumbs-up text-dark pr-2"></i> <%= pluralize(post.likers.count, 'like') %>
-          <% end %>
-        <% else %>
-          <%= link_to like_post_path(post), class: "text-decoration-none text-dark" do %>
-            <i class="fa fa-thumbs-up text-primary pr-2"></i><%= pluralize(post.likers.count, 'like') %>
-        <% end %>
+<div class="mt-3 mx-auto" style="width: 40rem">
+  <% if @posts.any? %>
+      <% @posts.each do |post| %>
+        <div class="card shadow-sm mt-3">
+          <div class="card-body float-right">
+            <%= link_to post.user.name, user_path(post.user), class: "h5 d-inline text-dark text-decoration-none" %>
+            <p class="small"> <%= post.created_at.strftime('%b %e at %l:%M %p') %> </p>
+              <div class="modify">
+                <% if post.user.name == current_user.name %>
+              <%= link_to edit_post_path(post), class: "float-right text-decoration-none" do %>
+                 <i class="far fa-edit pr-2"></i>
+              <% end %>
+              <%= link_to post_path(post), method: :delete, class: "float-right pr-2" do %>
+                 <i class="fas fa-trash pr-2"></i>
+              <% end %>
+            <% end %>
+              </div>
+              <p> <%= post.body %> </p>
+            
+              <% if post.likers.include?(current_user) %>
+                <%= link_to unlike_post_path(post), class: "text-decoration-none text-dark" do %>
+                  <i class="fas fa-thumbs-up text-primary"></i> <%= pluralize(post.likers.count, 'like') %>
+              <% end %>
+            <% else %>
+              <%= link_to like_post_path(post), class: "text-decoration-none text-dark" do %>
+                <i class="far fa-thumbs-up"></i> <%= pluralize(post.likers.count, 'like') %>
+                <% end %>
+            <% end %>
+
+            <%= link_to "#{pluralize(post.comments.count, 'comment')}", post_path(post),
+            class: "text-muted float-right" %>
+          </div>
+        </div>
       <% end %>
-      <% if post.user == current_user %>
-        <%= link_to "Delete",post_path(post), method: :delete %>
-      <% end %>
-      <%= link_to "Comment", post_path(post), method: :get %>
-    </div>
-  <% end %>
-</div>
+    <% else %>
+    <div class="list-group shadow-sm mb-3">
+      <div class="list-group-item">
+        <span class="text-muted"> No posts yet </span>
+      </div>
+    <% end %>
+  </div>

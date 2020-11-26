@@ -23,6 +23,19 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+      if @post.update(params.require(:post).permit(:body))
+        redirect_back fallback_location: posts_path, notice: "Your post has been updated"
+      else
+        render :edit, notice: "Please try again"
+      end
+    end
+
   def destroy
     @post = Post.find(params[:id])
     @post.destroy

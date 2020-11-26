@@ -14,7 +14,7 @@
   </div>
 </div>
 
-<div class="tab-content mt-4" id="pills-tabContent">
+<div class="tab-content mt-3 mx-auto" style="width: 40rem" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-timeline" role="tabpanel" aria-labelledby="pills-timeline-tab">
     <% if @user.posts.any? %>
       <% @user.posts.each do |post| %>
@@ -23,8 +23,14 @@
             <%= link_to post.user.name, user_path(post.user), class: "h5 d-inline text-dark text-decoration-none" %>
             <p class="small"> <%= post.created_at.strftime('%b %e at %l:%M %p') %> </p>
               <div class="modify">
-                <%= link_to 'Edit', edit_post_path(post), class: "float-right" %>
-                <%= link_to 'Delete', post_path(post), method: :delete, class: "float-right pr-2" %>
+                <% if post.user.name == current_user.name %>
+              <%= link_to edit_post_path(post), class: "float-right text-decoration-none" do %>
+                 <i class="far fa-edit pr-2"></i>
+              <% end %>
+              <%= link_to post_path(post), method: :delete, class: "float-right pr-2" do %>
+                 <i class="fas fa-trash pr-2"></i>
+              <% end %>
+            <% end %>
               </div>
               <p> <%= post.body %> </p>
             

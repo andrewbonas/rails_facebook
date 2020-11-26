@@ -1,36 +1,42 @@
 <div class= "card shadow-sm mt-3 mx-auto" style="width: 40rem">
-<div class="card-body">
-<h5><%= @post.user.name %></h5>
-<p class="small"> <%= @post.created_at.strftime('%b %e at %l:%M %p') %> </p>
-<p class="mb-4"> <%=@post.body %> </p>
-  
-  <% if @post.likers.include?(current_user) %>
-    <%= link_to unlike_post_path(@post), class: "text-decoration-none text-dark" do %>
-      <i class="fa fa-thumbs-up text-dark pr-2"></i> <%= pluralize(@post.likers.count, 'like') %>
-    <% end %>
-  <% else %>
-    <%= link_to like_post_path(@post), class: "text-decoration-none text-dark" do %>
-      <i class="fa fa-thumbs-up text-primary pr-2"></i><%= pluralize(@post.likers.count, 'like') %>
-    <% end %>
-  <% end %>
-  <% if @post.user == current_user %>
-    <%= link_to 'Edit', edit_post_path(@post), class: "float-right" %> 
-    <%= link_to 'Delete', post_path(@post), method: :delete, class: "float-right pr-2" %>
-  <% end %>
-</div>
+  <div class="card-body">
+    <h5><%= @post.user.name %></h5>
+      <p class="small"> <%= @post.created_at.strftime('%b %e at %l:%M %p') %> </p>
+        <p class="mb-4"> <%=@post.body %> </p>
+            <% if @post.likers.include?(current_user) %>
+              <%= link_to unlike_post_path(@post), class: "text-decoration-none text-dark" do %>
+                <i class="fas fa-thumbs-up text-dark pr-2"></i> <%= pluralize(@post.likers.count, 'like') %>
+              <% end %>
+            <% else %>
+              <%= link_to like_post_path(@post), class: "text-decoration-none text-dark" do %>
+                <i class="far fa-thumbs-up text-primary pr-2"></i><%= pluralize(@post.likers.count, 'like') %>
+              <% end %>
+            <% end %>
+            <% if @post.user == current_user %>
+              <%= link_to edit_post_path(@post), class: "float-right text-decoration-none" do %>
+                 <i class="far fa-edit pr-2"></i>
+              <% end %>
+              <%= link_to post_path(@post), method: :delete, class: "float-right pr-2" do %>
+                 <i class="fas fa-trash pr-2"></i>
+              <% end %>
+            <% end %>
+          <hr>
 
-<div class="card-footer">
-  <% if @post.comments.any? %>
-    <% @post.comments.each do |comment| %>
-    <p>
-      <%= link_to comment.user.name, root_path, class: "h5 text-dark text-underline" %>
-       <p> <%= comment.body %></p>
-        <% if comment.user == current_user %>
-          <%= link_to "delete", [comment.post, comment], method: :delete %>
-        <% end %>
-    <% end %>
-    </p>
-  <% end %>
-<%= render 'comments/form' %>
-</div>
+          <% if @post.comments.any? %>
+            <% @post.comments.each do |comment| %>
+              <%= link_to comment.user.name, root_path, class: "h6 text-dark" %>
+              <p>
+                <%= comment.body %>
+                <% if comment.user == current_user %>
+                  <%= link_to [comment.post, comment], method: :delete, class: "float-right" do %>
+                    <i class="fas fa-trash pr-2"></i>
+                  <% end %>
+              </p>
+                <% end %>
+             <% end %>
+          <% end %>
+        </div>
+        <div class="card-footer">
+          <%= render 'comments/form' %>
+    </div>
 </div>
