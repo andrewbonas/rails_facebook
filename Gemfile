@@ -33,6 +33,7 @@ gem 'devise', '~> 4.7', '>= 4.7.3'
 gem 'has_friendship'
 gem 'bootstrap'
 gem 'gravatar_image_tag', '~> 1.2'
+gem "image_processing"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -1,5 +1,9 @@
 <div class= "card shadow-sm mt-3 mx-auto" style="width: 40rem">
   <div class="card-body">
+  <div>
+  
+    <%= image_tag(@post.user.avatar) %>
+  
     <h5><%= @post.user.name %></h5>
       <p class="small"> <%= @post.created_at.strftime('%b %e at %l:%M %p') %> </p>
         <p class="mb-4"> <%=@post.body %> </p>

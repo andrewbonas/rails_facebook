@@ -9,11 +9,16 @@
    <div class="form-group">
         <div class="row">
           <div class="col-sm-4">
-            <%= image_tag user_avatar(resource, 30), class: "rounded-circle" %>
+            <%= image_tag user_avatar(resource, 100), class: "rounded-circle" %>
           </div>
 
           <div class="col-sm-8">
+            <label class="btn btn-outline-primary btn-sm mt-4">
+              Upload Photo
+            <span style="display:none;">
             <%= f.file_field :avatar %>
+            </span>
+            </label>
           </div>
         </div>
       </div>

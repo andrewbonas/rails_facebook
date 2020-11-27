@@ -8,6 +8,13 @@
       <% @posts.each do |post| %>
         <div class="card shadow-sm mt-3">
           <div class="card-body float-right">
+          <figure>
+          <% if post.user.avatar.attached? %>
+         <%= image_tag post.user.avatar.variant(resize: "100x100!"), class: "rounded-circle" %>
+         <% else %>
+         <%=  gravatar_image_tag(post.user.email) %>
+         <% end %>
+  </figure>
             <%= link_to post.user.name, user_path(post.user), class: "h5 d-inline text-dark text-decoration-none" %>
             <p class="small"> <%= post.created_at.strftime('%b %e at %l:%M %p') %> </p>
               <div class="modify">
