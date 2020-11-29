@@ -1,10 +1,12 @@
 <div class= "card shadow-sm mt-3 mx-auto" style="width: 40rem">
   <div class="card-body">
-  <div>
-  
-    <%= image_tag(@post.user.avatar) %>
-  
-    <h5><%= @post.user.name %></h5>
+    <div>
+      <% if @post.user.avatar.attached? %>
+        <%= image_tag @post.user.avatar.variant(resize: "100x100!"), class: "rounded-circle" %>
+      <% else %>
+        <%=  image_tag asset_path('default_profile.jpg'), :size => "100x100", class: 'rounded-circle', alt: @post.user.name %>
+      <% end %>  
+      <%= link_to @post.user.name, user_path(@post.user), class: "h5 d-inline text-dark text-decoration-none" %>
       <p class="small"> <%= @post.created_at.strftime('%b %e at %l:%M %p') %> </p>
         <p class="mb-4"> <%=@post.body %> </p>
             <% if @post.likers.include?(current_user) %>
@@ -28,19 +30,25 @@
 
           <% if @post.comments.any? %>
             <% @post.comments.each do |comment| %>
-              <%= link_to comment.user.name, root_path, class: "h6 text-dark" %>
-              <p>
-                <%= comment.body %>
-                <% if comment.user == current_user %>
-                  <%= link_to [comment.post, comment], method: :delete, class: "float-right" do %>
-                    <i class="fas fa-trash pr-2"></i>
-                  <% end %>
-              </p>
-                <% end %>
+              <% if @post.user.avatar.attached? %>
+                <%= image_tag @post.user.avatar.variant(resize: "40x40!"), class: "rounded-circle" %>
+              <% else %>
+                <%=  image_tag asset_path('default_profile.jpg'), :size => "40x40", class: 'rounded-circle', alt: @post.user.name %>
+              <% end %> 
+              <%= link_to comment.user.name, root_path, class: "h6 text-dark text-decoration-none" %>
+                <p class="small"> <%= comment.created_at.strftime('%b %e at %l:%M %p') %> </p>
+                  <p class="ml-5">
+                    <%= comment.body %>
+                      <% if comment.user == current_user %>
+                        <%= link_to [comment.post, comment], method: :delete, class: "float-right" do %>
+                          <i class="fas fa-trash pr-2"></i>
+                      <% end %>
+                  </p>
+              <% end %>
              <% end %>
           <% end %>
         </div>
-        <div class="card-footer">
+        <div class="comments">
           <%= render 'comments/form' %>
     </div>
 </div>

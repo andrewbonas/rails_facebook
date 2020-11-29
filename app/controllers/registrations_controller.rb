@@ -2,14 +2,19 @@ class RegistrationsController < Devise::RegistrationsController
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
-  
+
+  def create
+    super
+    UserMailer.welcome_email(resource).deliver unless resource.invalid?
+  end
 
   protected
 
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-      devise_parameter_sanitizer.permit(:account_update, keys: [:name, :avatar])
-    end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :avatar])
+  end
+
   private
 
   def sign_up_params

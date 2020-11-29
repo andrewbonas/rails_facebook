@@ -24,6 +24,11 @@
       <% if current_user.requested_friends.any? %>
         <% current_user.requested_friends.each do |requesting_user| %>
           <div class="list-group-item">
+          <% if requesting_user.avatar.attached? %>
+            <%= image_tag requesting_user.avatar.variant(resize: "100x100!"), class: "rounded-circle" %>
+          <% else %>
+            <%=  image_tag asset_path('default_profile.jpg'), :size => "100x100", class: 'rounded-circle', alt: requesting_user.name %>
+          <% end %> 
             <%= link_to requesting_user.name, user_path(requesting_user), class: "h6 text-dark text-decoration-none" %>
             <%= link_to 'Accept Request', accept_path(requesting_user), class: "btn btn-sm btn-outline-primary float-right" %>
             <%= link_to 'Decline Request', decline_path(requesting_user), class: "btn btn-sm btn-outline-danger mr-2 float-right" %>
@@ -42,6 +47,11 @@
     <% @users.each do |user| %>
       <% unless user == current_user %>
         <div class="list-group-item">
+        <% if user.avatar.attached? %>
+          <%= image_tag user.avatar.variant(resize: "40x40!"), class: "rounded-circle" %>
+        <% else %>
+          <%=  image_tag asset_path('default_profile.jpg'), :size => "40x40", class: 'rounded-circle', alt: user.name %>
+        <% end %> 
           <%= link_to user.name, users_path(user), class: "h6 text-dark text-decoration-none" %>
             <% if current_user.pending_friends.include?(user) %>
                 <span class="text-muted float-right mr-3">Waiting for reply</span>

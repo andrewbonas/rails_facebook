@@ -8,27 +8,24 @@
       <% @posts.each do |post| %>
         <div class="card shadow-sm mt-3">
           <div class="card-body float-right">
-          <figure>
-          <% if post.user.avatar.attached? %>
-         <%= image_tag post.user.avatar.variant(resize: "100x100!"), class: "rounded-circle" %>
-         <% else %>
-         <%=  gravatar_image_tag(post.user.email) %>
-         <% end %>
-  </figure>
-            <%= link_to post.user.name, user_path(post.user), class: "h5 d-inline text-dark text-decoration-none" %>
-            <p class="small"> <%= post.created_at.strftime('%b %e at %l:%M %p') %> </p>
-              <div class="modify">
-                <% if post.user.name == current_user.name %>
-              <%= link_to edit_post_path(post), class: "float-right text-decoration-none" do %>
-                 <i class="far fa-edit pr-2"></i>
-              <% end %>
-              <%= link_to post_path(post), method: :delete, class: "float-right pr-2" do %>
-                 <i class="fas fa-trash pr-2"></i>
-              <% end %>
+            <% if post.user.avatar.attached? %>
+              <%= image_tag post.user.avatar.variant(resize: "100x100!"), class: "rounded-circle" %>
+            <% else %>
+              <%=  image_tag asset_path('default_profile.jpg'), :size => "100x100", class: 'rounded-circle', alt: post.user.name %>
             <% end %>
+            <%= link_to post.user.name, user_path(post.user), class: "h5 d-inline text-dark text-decoration-none" %>
+              <p class="small"> <%= post.created_at.strftime('%b %e at %l:%M %p') %> </p>
+                <div class="modify">
+                  <% if post.user.name == current_user.name %>
+                    <%= link_to edit_post_path(post), class: "float-right text-decoration-none" do %>
+                      <i class="far fa-edit pr-2"></i>
+                  <% end %>
+                  <%= link_to post_path(post), method: :delete, class: "float-right pr-2" do %>
+                    <i class="fas fa-trash pr-2"></i>
+                <% end %>
+              <% end %>
               </div>
               <p> <%= post.body %> </p>
-            
               <% if post.likers.include?(current_user) %>
                 <%= link_to unlike_post_path(post), class: "text-decoration-none text-dark" do %>
                   <i class="fas fa-thumbs-up text-primary"></i> <%= pluralize(post.likers.count, 'like') %>
@@ -38,7 +35,6 @@
                 <i class="far fa-thumbs-up"></i> <%= pluralize(post.likers.count, 'like') %>
                 <% end %>
             <% end %>
-
             <%= link_to "#{pluralize(post.comments.count, 'comment')}", post_path(post),
             class: "text-muted float-right" %>
           </div>

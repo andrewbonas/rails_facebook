@@ -34,6 +34,10 @@ gem 'has_friendship'
 gem 'bootstrap'
 gem 'gravatar_image_tag', '~> 1.2'
 gem "image_processing"
+gem 'omniauth-facebook'
+gem "figaro"
+gem "letter_opener", :group => :development
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
