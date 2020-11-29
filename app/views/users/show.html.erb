@@ -21,10 +21,10 @@
         <div class="card shadow-sm mt-3">
           <div class="card-body float-right">
           <% if @user.avatar.attached? %>
-        <%= image_tag @user.avatar.variant(resize: "100x100!"), class: "rounded-circle" %>
-      <% else %>
-        <%=  image_tag asset_path('default_profile.jpg'), :size => "100x100", class: 'rounded-circle', alt: @user.name %>
-      <% end %> 
+            <%= image_tag @user.avatar.variant(resize: "100x100!"), class: "rounded-circle" %>
+          <% else %>
+            <%=  image_tag asset_path('default_profile.jpg'), :size => "100x100", class: 'rounded-circle', alt: @user.name %>
+          <% end %> 
             <%= link_to post.user.name, user_path(post.user), class: "h5 d-inline text-dark text-decoration-none" %>
             <p class="small"> <%= post.created_at.strftime('%b %e at %l:%M %p') %> </p>
               <div class="modify">
