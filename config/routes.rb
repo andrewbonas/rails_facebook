@@ -8,7 +8,15 @@ Rails.application.routes.draw do
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root "posts#index"
+  
+  #root to login page if not logged in else user posts.
+  authenticated do
+    root 'posts#index'
+  end
+  
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
 
   get '/users', to: 'users#index', as: :users
   get '/:id', to: 'users#show', as: :user

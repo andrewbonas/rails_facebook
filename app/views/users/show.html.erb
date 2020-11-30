@@ -41,11 +41,11 @@
             
               <% if post.likers.include?(current_user) %>
                 <%= link_to unlike_post_path(post), class: "text-decoration-none text-dark" do %>
-                  <i class="fas fa-thumbs-up text-primary"></i> <%= pluralize(post.likers.count, 'like') %>
+                  <i class="fas fa-thumbs-up pr-2"></i> <%= pluralize(post.likers.count, 'like') %>
               <% end %>
             <% else %>
               <%= link_to like_post_path(post), class: "text-decoration-none text-dark" do %>
-                <i class="far fa-thumbs-up"></i> <%= pluralize(post.likers.count, 'like') %>
+                <i class="far fa-thumbs-up text-primary pr-2"></i> <%= pluralize(post.likers.count, 'like') %>
                 <% end %>
             <% end %>
 
@@ -67,6 +67,11 @@
       <% if @user.friends.any? %>
         <% @user.friends.each do |friend| %>
           <div class="list-group-item">
+          <% if friend.avatar.attached? %>
+            <%= image_tag friend.avatar.variant(resize: "40x40!"), class: "rounded-circle" %>
+          <% else %>
+            <%=  image_tag asset_path('default_profile.jpg'), :size => "40x40", class: 'rounded-circle', alt: friend.name %>
+          <% end %> 
             <%= link_to friend.name, user_path(friend), class: "h6 text-dark text-decoration-none" %>
           </div>
         <% end %>
