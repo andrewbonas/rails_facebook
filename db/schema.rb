@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 2020_11_28_222424) do
 
   create_table "comments", force: :cascade do |t|
     t.text "body", null: false
-    t.integer "post_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "post_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(version: 2020_11_28_222424) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.integer "liked_post_id", null: false
-    t.integer "liker_id", null: false
+    t.bigint "liked_post_id", null: false
+    t.bigint "liker_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["liked_post_id"], name: "index_likes_on_liked_post_id"
@@ -91,4 +91,8 @@ ActiveRecord::Schema.define(version: 2020_11_28_222424) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
+  add_foreign_key "likes", "posts", column: "liked_post_id"
+  add_foreign_key "likes", "users", column: "liker_id"
 end
