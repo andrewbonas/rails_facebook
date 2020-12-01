@@ -15,4 +15,3 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
-import "@fortawesome/fontawesome-free/js/all";
