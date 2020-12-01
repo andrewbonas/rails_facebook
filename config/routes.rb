@@ -24,5 +24,4 @@ Rails.application.routes.draw do
   get '/:id/accept', to: 'users#accept_friendship', as: :accept
   get '/:id/decline', to: 'users#decline_friendship', as: :decline
   get '/:id/unfriend', to: 'users#remove_friendship', as: :unfriend
-
 end
