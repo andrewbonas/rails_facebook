@@ -29,14 +29,11 @@ gem "font-awesome-rails"
 # gem 'mini_magick', '~> 4.8'
 
 gem 'devise', '~> 4.7', '>= 4.7.3'
-
 gem 'has_friendship'
 gem 'bootstrap'
 gem "image_processing"
 gem 'omniauth-facebook'
 gem "figaro"
-gem "letter_opener", :group => :development
-
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -57,11 +54,11 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'better_errors', '~> 2.9', '>= 2.9.1'
-  
   gem 'letter_opener'
 end
-gem 'pg'
-#gem 'sqlite3'
+  gem 'pg'
+  #gem 'sqlite3'
+
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
