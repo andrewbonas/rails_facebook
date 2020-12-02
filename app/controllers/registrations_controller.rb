@@ -3,10 +3,11 @@ class RegistrationsController < Devise::RegistrationsController
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def create
-    super
-    UserMailer.welcome_email(@user).deliver_now
-  end
+ # Removed for deployment
+ # def create
+ #  super
+ #  UserMailer.welcome_email(@user).deliver_now
+ # end
 
   protected
 
