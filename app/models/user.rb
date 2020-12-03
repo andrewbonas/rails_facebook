@@ -6,7 +6,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
          
-
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, foreign_key: :liker_id
