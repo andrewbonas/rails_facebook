@@ -30,25 +30,27 @@
 
           <% if @post.comments.any? %>
             <% @post.comments.each do |comment| %>
-              <% if @post.user.avatar.attached? %>
-                <%= image_tag @post.user.avatar.variant(resize: "40x40!"), class: "rounded-circle" %>
-              <% else %>
-                <%=  image_tag asset_path('default_profile.jpg'), :size => "40x40", class: 'rounded-circle', alt: @post.user.name %>
-              <% end %> 
-              <%= link_to comment.user.name, root_path, class: "h6 text-dark text-decoration-none" %>
-                <p class="small"> <%= comment.created_at.strftime('%b %e at %l:%M %p') %> </p>
-                  <p class="ml-5">
-                    <%= comment.body %>
-                      <% if comment.user == current_user %>
-                        <%= link_to [comment.post, comment], method: :delete, class: "float-right" do %>
-                          <i class="fas fa-trash pr-2"></i>
-                      <% end %>
-                  </p>
-              <% end %>
-             <% end %>
+              <div>
+                <% if @post.user.avatar.attached? %>
+                  <%= image_tag @post.user.avatar.variant(resize: "40x40!"), class: "rounded-circle" %>
+                <% else %>
+                  <%=  image_tag asset_path('default_profile.jpg'), :size => "40x40", class: 'rounded-circle', alt: @post.user.name %>
+                <% end %> 
+                <%= link_to comment.user.name, root_path, class: "h6 text-dark text-decoration-none" %>
+                  <p class="small"> <%= comment.created_at.strftime('%b %e at %l:%M %p') %> </p>
+                    <p>
+                      <%= comment.body %>
+                        <% if comment.user == current_user %>
+                          <%= link_to [comment.post, comment], method: :delete, class: "float-right" do %>
+                            <i class="fas fa-trash pr-2"></i>
+                          <% end %>
+                        <% end %>
+                    </p>
+              </div>
+            <% end %>
           <% end %>
-        </div>
         <div class="comments">
           <%= render 'comments/form' %>
+        </div>
     </div>
 </div>
