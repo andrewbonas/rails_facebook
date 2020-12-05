@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: dstlt07vx
+  api_key: '587528891248876'
+  api_secret: FAIEEdC_PSL5SWBGdbl_Mm4d6Tg
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: dstlt07vx
+  api_key: '587528891248876'
+  api_secret: FAIEEdC_PSL5SWBGdbl_Mm4d6Tg
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: dstlt07vx
+  api_key: '587528891248876'
+  api_secret: FAIEEdC_PSL5SWBGdbl_Mm4d6Tg
+  enhance_image_tag: true
+  static_file_support: false

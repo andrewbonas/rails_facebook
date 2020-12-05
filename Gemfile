@@ -35,6 +35,7 @@ gem 'jquery-rails'
 gem "image_processing"
 gem 'omniauth-facebook'
 gem "figaro"
+gem 'cloudinary'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
